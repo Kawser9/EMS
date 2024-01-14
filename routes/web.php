@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\backend\DepartmentController;
 use App\Http\Controllers\backend\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,9 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'], function(){
 
     Route::get('/employee-list',[EmployeeController::class,'index'])->name('employee.list');
     Route::get('/employee-create',[EmployeeController::class,'create'])->name('employee.create');
+
+    Route::get('/department-list',[DepartmentController::class, 'index'])->name('department.list');
+    Route::get('/department-create',[DepartmentController::class, 'create'])->name('department.create');
+    Route::post('/department-store',[DepartmentController::class, 'store'])->name('department.store');
 
 });
