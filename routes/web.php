@@ -14,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/admin-login',[DashboardController::class,'adminLogin'])->name('admin.login');
+Route::post('/admin-do-login',[DashboardController::class,'adminDoLogin'])->name('admin.do.login');
 
+Route::group(['prefix'=>'admin','middleware'=>'admin'], function(){
 
-Route::group(["prefix = /admin" ], function(){
-
+    Route::get('/logout',[DashboardController::class,'logout'])->name('admin.logout');
+    
     Route::get('/',[DashboardController::class,'dashboard'])->name('dashboard');
+
 
 
     Route::get('/employee-list',[EmployeeController::class,'index'])->name('employee.list');
