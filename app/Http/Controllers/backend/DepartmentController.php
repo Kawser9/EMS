@@ -10,8 +10,8 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        $department = Department::latest()->get();
-        return view('backend.pages.department.index',compact('department'));
+        $departments = Department::latest()->paginate(5);
+        return view('backend.pages.department.index',compact('departments'));
     }
     public function create()
     {

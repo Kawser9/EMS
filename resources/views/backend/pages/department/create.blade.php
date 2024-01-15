@@ -12,7 +12,7 @@
             @csrf
             <div class="col-md-6">
                 <label for="" class="form-label">Department ID</label>
-                <input type="number" name="departmentId" class="form-control" value="{{isset($department) ? $department->departmentId + 1 : 10001}}" >
+                <input readonly type="number" name="departmentId" class="form-control" value="{{isset($department) ? $department->departmentId + 1 : 10001}}" >
             </div>
             <div class="col-md-6">
                 <label for="inputname" class="form-label">Departmanet Name</label>

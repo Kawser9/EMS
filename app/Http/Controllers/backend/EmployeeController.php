@@ -10,32 +10,33 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employee = Employee::all();
-        return view('backend.pages.employee.index',compact('employee'));
+        $employees = Employee::with('department_name')->latest()->get();
+        return view('backend.pages.employee.index',compact('employees'));
     }
     public function create()
     {
+        $employee = Employee::latest()->first();
         $department = Department::all();
-        return view('backend.pages.employee.create',compact('department'));
+        return view('backend.pages.employee.create',compact('department','employee'));
     }
     public function store(Request $request)
     {
         // dd($request->all());
         $request->validate([
-            // 'department_id' => 'required',
-            // 'first_name' => 'required',
-            // 'last_name' => 'required',
-            // 'email' => 'required|email|unique',
-            // 'phone_number' => 'required|numeric|unique:employees,phone_number',
+            'department_id' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'phone_number' => 'required',
             // 'birth_date' => 'required|date',
-            // 'address' => 'required|string|max:255',
+            'address' => 'required',
             // 'city' => 'required|string',
             // 'state' => 'required|string',
             // 'zip_code' => 'required',
             // 'country' => 'required|string',
-            // 'gender' => 'required|string|in:Male,Female,Other',
-            // 'position' => 'required|string',
-            // 'salary' => 'numeric',
+            'gender' => 'required',
+            'position' => 'required|string',
+            'salary' => 'numeric',
             // 'hire_date' => 'required|date',
             // 'notes' => 'required',
 
@@ -44,6 +45,7 @@ class EmployeeController extends Controller
             'department_id' => $request->department_id,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
+            'employee_id' => $request->employee_id,
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'birth_date' => $request->birth_date,
@@ -61,4 +63,76 @@ class EmployeeController extends Controller
         return redirect()->back();
 
     }
+    public function edit(Request $request,$id)
+    {
+        $departments = Department::all();
+        $employee = Employee::find($id);
+        return view('backend.pages.employee.edit',compact(['departments','employee']));
+    }
+    public function update(Request $request ,$id)
+    {
+        $request->validate([
+            'department_id' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'phone_number' => 'required',
+            // 'birth_date' => 'required|date',
+            'address' => 'required',
+            // 'city' => 'required|string',
+            // 'state' => 'required|string',
+            // 'zip_code' => 'required',
+            // 'country' => 'required|string',
+            'gender' => 'required',
+            'position' => 'required|string',
+            'salary' => 'numeric',
+            // 'hire_date' => 'required|date',
+            // 'notes' => 'required',
+            
+        ]);
+        $employee = Employee::find($id);
+        $employee->update([
+            'department_id' => $request->department_id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'employee_id' => $request->employee_id,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'birth_date' => $request->birth_date,
+            'address' => $request->address,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip_code' => $request->zip_code,
+            'country' => $request->country,
+            'gender' => $request->gender,
+            'position' => $request->position,
+            'salary' => $request->salary,
+            'hire_date' => $request->hire_date,
+            'notes' => $request->notes
+        ]);
+        return redirect()->back();
+    }
+    public function delete($id)
+    {
+        $employee = Employee::find($id);
+        $employee -> delete();
+        return redirect()->back();
+    }
+
+    
+    public function employee_search()
+    {
+        return view('backend.pages.employee.employee_search');
+    }
+
+    public function ajax_employee_details($search_query)
+    {
+        $employees = Employee::with('department_name')
+        ->where('first_name','LIKE','%'.$search_query.'%')
+        ->orwhere('last_name','LIKE','%'.$search_query.'%')
+        ->orwhere('employee_id','LIKE','%'.$search_query.'%')
+        ->latest()->get();
+        return view('backend.pages.employee.search_data', compact('employees'));
+    }
+    
 }

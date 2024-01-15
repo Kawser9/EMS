@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\DepartmentController;
 use App\Http\Controllers\backend\EmployeeController;
+use App\Http\Controllers\backend\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,9 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'], function(){
     Route::get('/employee-edit/{id}',[EmployeeController::class, 'edit'])->name('employee.edit');
     Route::put('/employee-update/{id}',[EmployeeController::class, 'update'])->name('employee.update');
     Route::get('/employee-delete/{id}',[EmployeeController::class, 'delete'])->name('employee.delete');
+    
+    Route::get('/employee-search',[EmployeeController::class, 'employee_search'])->name('employee.search');
+    Route::get('/ajax/employee-details/search/{search_query}',[EmployeeController::class, 'ajax_employee_details'])->name('employee.ajax_employee_details');
 
     Route::get('/department-list',[DepartmentController::class, 'index'])->name('department.list');
     Route::get('/department-create',[DepartmentController::class, 'create'])->name('department.create');
@@ -39,4 +43,11 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'], function(){
     Route::get('/department-edit/{id}',[DepartmentController::class, 'edit'])->name('department.edit');
     Route::put('/department-update/{id}',[DepartmentController::class, 'update'])->name('department.update');
     Route::get('/department-delete/{id}',[DepartmentController::class, 'delete'])->name('department.delete');
+
+
+    Route::get('/report',[ReportController::class, 'list'])->name('report.list');
+    Route::get('/report_selary/ditails/total',[ReportController::class, 'ditails_total'])->name('report.selary.ditails.total');
+    Route::get('/depWiseReportList',[ReportController::class, 'depWiseReportList'])->name('depWiseReport.list');
+    // Route::get('/report/depWiseReport/{departmentId}',[ReportController::class, 'depWiseReport'])->name('get.departmentData');
+    // Route::get('/get-department-data/{departmentId}',[ReportController::class ,'getDepartmentData'])->name('get.departmentData');
 });

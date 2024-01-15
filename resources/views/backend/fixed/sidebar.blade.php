@@ -56,6 +56,18 @@
             </div>
         </div>
     </li>
+    <li class="nav-item">
+        <a class="nav-link " href="{{Route('employee.search')}}" data-toggle="" data-target=""
+             aria-controls="collapseThree">
+            <span>Search Employee</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="{{Route('report.list')}}" data-toggle="" data-target="#collapseThree"
+             aria-controls="collapseThree">
+            <span>Report</span>
+        </a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

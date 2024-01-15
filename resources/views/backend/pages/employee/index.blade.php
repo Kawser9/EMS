@@ -15,23 +15,37 @@
                         <th>SL</th>
                         <th>Name</th>
                         <th>Position</th>
-                        <th>Office</th>
                         <th>Age</th>
-                        <th>Start date</th>
                         <th>Salary</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Start date</th>
+                        <th>Dep. Name</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($employee as $item)
+                    @foreach ($employees as $item)
                         <tr>
-                            <td>1</td>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
+                            <td>{{$loop->iteration}}</td>
+                            <td>{{$item->first_name .' '.$item->last_name }}</td>
+                            <td>{{$item->position}}</td>
+                            <td><?php
+                                $birthday = $item->birth_date;
+                                if (!empty($birthday)) {
+                                    $birthdayDate = \Carbon\Carbon::createFromFormat('Y-m-d', $birthday);
+                                    $age = $birthdayDate->age;
+                                } else {
+                                    $age = ''; 
+                                }
+                                ?>
+                                {{$age}}
+                            </td>
+                            <td>{{$item->salary }} BTD</td>
+                            <td>{{$item->phone_number}}</td>
+                            <td>{{$item->email}}</td>
+                            <td>{{$item->hire_date}}</td>
+                            <td>{{$item->department_name->name}}</td>
                             <td>
                                 <a class="btn btn-primary" href="{{Route('employee.edit',$item->id)}}">Edit</a>
                                 <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</a>
@@ -48,7 +62,7 @@
                                         <div class="modal-body">Select "Delete" if you are really want to delete the date from the table.</div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                            <a class="btn btn-primary"  href="{{Route('employee.delete',$item->id)}}">Delete</a>
+                                            <a class="btn btn-danger"  href="{{Route('employee.delete',$item->id)}}">Delete</a>
                                         </div>
                                     </div>
                                 </div>

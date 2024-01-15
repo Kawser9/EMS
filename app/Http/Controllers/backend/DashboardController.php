@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\backend\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,8 +11,17 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        return view('backend.pages.dashboard');
+        $employee=Employee::all();
+        $ecount = Employee::count();
+        return view('backend.pages.dashboard',compact(['employee','ecount']));
     }
+
+    public function getTotalSalary()
+    {
+        $totalSalary = Employee::sum('salary');
+        return response()->json(['totalSalary' => $totalSalary]);
+    }
+    
     public function adminLogin()
     {
         return view('backend.pages.login');

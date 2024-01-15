@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('department_id')->constrained('departments')->restrictOnDelete();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('employee_id');
             $table->string('email')->unique();
             $table->string('phone_number')->nullable()->unique();
             $table->date('birth_date')->nullable();
@@ -26,9 +27,10 @@ return new class extends Migration
             $table->string('country')->nullable();
             $table->string('gender')->nullable();
             $table->string('position')->nullable();
-            $table->decimal('salary', 10, 2)->nullable();
+            $table->double('salary', 10)->nullable();
             $table->date('hire_date')->nullable();
             $table->text('notes')->nullable();
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }

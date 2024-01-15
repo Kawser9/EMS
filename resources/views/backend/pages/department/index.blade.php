@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($department as $item)
+                    @foreach ($departments as $item)
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$item->departmentId}}</td>
@@ -40,7 +40,7 @@
                                         <div class="modal-body">Select "Delete" if you are really want to delete the date from the table.</div>
                                         <div class="modal-footer">
                                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                            <a class="btn btn-primary"  href="{{Route('department.delete',$item->id)}}">Delete</a>
+                                            <a class="btn btn-danger"  href="{{Route('department.delete',$item->id)}}">Delete</a>
                                         </div>
                                     </div>
                                 </div>
@@ -50,6 +50,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{$departments->links()}}
         </div>
     </div>
 </div>
