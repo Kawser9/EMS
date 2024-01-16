@@ -4,6 +4,7 @@
         <tr>
             <th>SL</th>
             <th>Name</th>
+            <th>Employee ID</th>
             <th>Position</th>
             <th>Age</th>
             <th>Salary</th>
@@ -11,6 +12,7 @@
             <th>Email</th>
             <th>Start date</th>
             <th>Dep. Name</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -18,10 +20,11 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>
-                    <a href="" target="_blank">
+                    <a href="{{Route('employee.show',$item->id)}}"> 
                         {{$item->first_name .' '.$item->last_name }}
                     </a>
                 </td>
+                <td>{{$item->employee_id}}</td>
                 <td>{{$item->position}}</td>
                 <td><?php
                     $birthday = $item->birth_date;
@@ -39,6 +42,9 @@
                 <td>{{$item->email}}</td>
                 <td>{{date('d-m-Y', strtotime($item->hire_date))}}</td>
                 <td>{{$item->department_name->name}}</td>
+                <td>
+                    <a href="{{Route('employee.email.from',$item->id)}}" class="btn btn-dark">Send Email</a>
+                </td>
                 
             </tr>
         @endforeach

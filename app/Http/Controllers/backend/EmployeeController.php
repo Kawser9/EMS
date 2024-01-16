@@ -10,7 +10,7 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::with('department_name')->latest()->get();
+        $employees = Employee::with('department_name')->where('status' , 'active')->latest()->get();
         return view('backend.pages.employee.index',compact('employees'));
     }
     public function create()
@@ -60,6 +60,7 @@ class EmployeeController extends Controller
             'hire_date' => $request->hire_date,
             'notes' => $request->notes,
         ]);
+        notify()->success('One new employee added succesfully.', 'Employee');
         return redirect()->back();
 
     }
@@ -110,12 +111,19 @@ class EmployeeController extends Controller
             'hire_date' => $request->hire_date,
             'notes' => $request->notes
         ]);
+        notify()->success('Employee information updated succesfully.', 'Employee');
         return redirect()->back();
+    }
+    public function show($id)
+    {
+        $employee = Employee::with('department_name')->find($id);
+        return view('backend.pages.employee.show',compact('employee'));
     }
     public function delete($id)
     {
         $employee = Employee::find($id);
         $employee -> delete();
+        notify()->success('One employee deleted succesfully.', 'Employee');
         return redirect()->back();
     }
 

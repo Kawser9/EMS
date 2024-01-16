@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\backend\Department;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Contracts\View\View;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
@@ -22,7 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
 
         $department=Department::all();
             view()->share('department', $department);

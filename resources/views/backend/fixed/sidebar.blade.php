@@ -63,6 +63,24 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link " href="{{Route('employee.search')}}" data-toggle="" data-target=""
+             aria-controls="collapseThree">
+            <span>Send Email to Employee</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="{{Route('general.report')}}" data-toggle="" data-target=""
+             aria-controls="collapseThree">
+            <span>General Report</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " href="{{Route('report.selary.ditails.total')}}" data-toggle="" data-target=""
+             aria-controls="collapseThree">
+            <span>Salary Distribution Report</span>
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link " href="{{Route('report.list')}}" data-toggle="" data-target="#collapseThree"
              aria-controls="collapseThree">
             <span>Report</span>

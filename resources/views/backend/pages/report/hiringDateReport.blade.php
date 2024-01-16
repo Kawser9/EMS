@@ -4,7 +4,7 @@
 <body>
     <div class="container mt-5">
       <h1>Select Date</h1>
-        <form action="" method="get" >
+        <form action="{{Route('general.report.data')}}" method="get" >
 
             @if ($errors->any())
             @foreach ($errors->all() as $error)
@@ -17,23 +17,25 @@
                 <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="start_date">Start Date:</label>
-                    <input value="{{request()->start_date}}" type="date" class="form-control" id="start_date" name="start_date" required>
+                    <input value="{{request()->start_date}}" type="date" class="form-control" id="start_date" name="start_date" >
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="end_date">End Date:</label>
-                    <input value="{{request()->end_date}}" type="date" class="form-control" id="end_date" name="end_date" required>
+                    <input value="{{request()->end_date}}" type="date" class="form-control" id="end_date" name="end_date" >
                 </div>
                 </div>
-                {{-- <div class="row">
+                <div class="row">
                     <div class="col-md-6 mb-3">
-                        <select name="brand_id" class="form-select" aria-label="Default select example" required>
-                        <option >Select brand</option>
-                            @foreach ($brands as $brand)
-                                <option  value="{{$brand->id}}">{{$brand->name}}</option>
-                            @endforeach
+                        <select name="department_id" class="form-control" aria-label="Default select example" required>
+                        <option >Select Department</option>
+                            @if(isset($departments))
+                                @foreach ($departments as $department)
+                                    <option @if (request()->department_id == $department->id) selected @endif value="{{$department->id}}">{{$department->name}}</option>
+                                @endforeach
+                            @endif
                         </select>
                     </div>
-                </div> --}}
+                </div>
   
             {{-- <div class="row">
                 <div class="col-md-6 mb-3">
@@ -46,62 +48,59 @@
             </div>
             </div> --}}
   
-        <button type="submit" class="button">Generate Report</button>
+        <button type="submit" class="btn btn-primary">Generate Report</button>
         </form>
 
-<div class="container mt-5" id="printReport"> 
-    <div style="text-align: center;">
-        <h1>Buy Gadget</h1>
-        <p>Uttara, Dhaka 1230</p>
-        <h2>Product Report</h2>
-        <p>{{auth()->user()->name}}</p>
-        <p>Report of {{request()->start_date}} to {{request()->end_date}}</p>
-    </div>
-    
-    <br>
-    
-        <div >
-            <table table class="table">
-                <thead>
-                    <tr>
-                    <th>SL</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Category</th>
-                        <th>Brand</th>
-                        <th>Status</th>
-                        <th>Type</th>
-                        <th>Adding Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @if(isset($productsByDate))
-                    <span>Total product : {{$productsByDate->count()}}</span> 
-                    @foreach($productsByDate as $key=>$product)
-                    <tr>
-                        <td>{{$key+1}}</td>
-                        <td>{{$product->name}}</td>
-                        <td>{{$product->price}}</td>
-                        <td>{{$product->quantity}}</td>
-                        <td>{{$product->catname->name}}</td>
-                        <td>{{$product->brand_name->name}}</td>
-                        <td>{{$product->status}}</td>
-                        <td>{{$product->type}}</td>
-                        <td>{{$product->created_at}}</td>
-                        
-                    </tr>
-                    @endforeach
-                    @endif
-                </tbody>
-            </table>
-            <br>
+        <div class="container mt-5">
+            <div class="container mt-5" id="printReport"> 
+                <div style="text-align: center;">
+                    <h1>Employee Manahement System</h1>
+                    <p>{{auth()->user()->name}}</p>
+                    <p>Report of {{request()->start_date}} to {{request()->end_date}}</p>
+                    <h1>{{request()->department_id}}</h1>
+                </div>
+                
+                <br>
+                
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>SL</th>
+                                    <th>Name</th>
+                                    <th>Employee ID</th>
+                                    <th>Department</th>
+                                    <th>Position</th>
+                                    <th>Salary</th>
+                                    <th>Start date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if(isset($employees))
+                                {{-- <span>Total product : {{$department_name->count()}}</span>  --}}
+                                @foreach($employees as $key=>$employee)
+                                <tr>
+                                    <td>{{$key+1}}</td>
+                                    <td>{{$employee->first_name.' '.$employee->last_name}}</td>
+                                    <td>{{$employee->employee_id}}</td>
+                                    <td>{{$employee->department_name->name}}</td>
+                                    <td>{{$employee->position}}</td>
+                                    <td>{{number_format($employee->salary, 0, ',')}} BDT</td>
+                                    <td>{{date('d-m-Y', strtotime($employee->hire_date))}}</td>
+                                </tr>
+                                @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                        <br>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
 </body>
 
-<button onclick="printReport()" class="button">Print Report</button>
+<button onclick="printReport()" class="btn btn-primary">Print Report</button>
 
 <script>
     function printReport() {

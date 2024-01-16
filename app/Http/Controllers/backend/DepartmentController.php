@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\backend\Department;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
@@ -29,6 +30,7 @@ class DepartmentController extends Controller
             'departmentId'=>$request->departmentId,
             'name'=>$request->departmentName
         ]);
+        notify()->success('New department added succesfully.', 'Department');
         return redirect()->back();
 
     }
@@ -48,12 +50,14 @@ class DepartmentController extends Controller
             'departmentId'=>$request->departmentId,
             'name'=>$request->departmentName
         ]);
+        notify()->success('Department updated succesfully.', 'Department');
         return redirect()->back();
     }
     public function delete($id)
     {
         $department = Department::find($id);
         $department -> delete();
+        notify()->success('Department Deleted succesfully.', 'Department');
         return redirect()->back();
     }
 }

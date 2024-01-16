@@ -29,6 +29,10 @@
                 <input type="text" name="last_name" class="form-control" id="inputName" value="{{$employee->last_name}}">
             </div>
             <div class="col-md-3">
+                <label for="employee_id" class="form-label">Employee Id</label>
+                <input readonly type="number" name="employee_id" value="{{$employee->employee_id}}" class="form-control" id="employee_id">
+            </div>
+            <div class="col-md-3">
                 <label for="department_id" class="form-label">Department</label> <br>
                 <select class="form-control" name="department_id" aria-label="Default select example">
                     <option class="form-control" disabled selected>Select Department</option>

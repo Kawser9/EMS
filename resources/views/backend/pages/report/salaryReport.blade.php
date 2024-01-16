@@ -34,14 +34,14 @@
                                 <td>{{$employee->first_name.' '.$employee->last_name}}</td>
                                 <td>{{$employee->employee_id}}</td>
                                 <td>{{$employee->department_name->name}}</td>
-                                <td>{{number_format($employee->salary, 0, ',')}}</td>
+                                <td>{{number_format($employee->salary, 0, ',')}} BDT</td>
                             </tr>
                             @endforeach
                             @endif
                             <tr>
                                 <td colspan="4" class="text-right border-left-primary text-bold">Total:</td>
                                 {{-- <td>{{ $employees ? $employees->sum('salary') : 0 }}</td> --}}
-                                <td>{{ $employees ? number_format($employees->sum('salary'), 0, ',') : '0,00' }}</td>
+                                <td>{{ $employees ? number_format($employees->sum('salary'), 0, ',') : '0,00' }} BDT</td>
 
                             </tr>
                         </tbody>

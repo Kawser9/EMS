@@ -11,8 +11,8 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        $employee=Employee::all();
-        $ecount = Employee::count();
+        $employee=Employee::where('status' , 'active')->get();
+        $ecount = Employee::where('status' , 'active')->count();
         return view('backend.pages.dashboard',compact(['employee','ecount']));
     }
 
@@ -35,15 +35,16 @@ class DashboardController extends Controller
         ]);
         if(auth()->attempt(request()->only(['email','password'])))
         {
-            // Toastr::success('Login successfully.', '{{auth()->user()->name}}', ['options']);
-            return redirect()->route('dashboard');
+        notify()->success('You are successfully login to the EMS.', 'Welcome to Admin panel');
+        return redirect()->route('dashboard');
         }
-            // Toastr::warning('Login faild,try again.', 'ADMIN', ['options']);
-            return redirect()->route('admin.login');
+        notify()->warning('You are not valid for login to the EMS.', 'Try again');
+        return redirect()->route('admin.login');
     }
     public function logout()
     {
         Auth::logout();
+        notify()->success('You are successfully logeout for the EMS.', 'Bye Bye from Admin panel');
         return view('backend.pages.login');
     }
 }

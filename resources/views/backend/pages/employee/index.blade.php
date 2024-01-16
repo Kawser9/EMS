@@ -14,6 +14,7 @@
                     <tr>
                         <th>SL</th>
                         <th>Name</th>
+                        <th>Employee ID</th>
                         <th>Position</th>
                         <th>Age</th>
                         <th>Salary</th>
@@ -29,6 +30,7 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$item->first_name .' '.$item->last_name }}</td>
+                            <td>{{$item->employee_id}}</td>
                             <td>{{$item->position}}</td>
                             <td><?php
                                 $birthday = $item->birth_date;
@@ -46,10 +48,13 @@
                             <td>{{$item->email}}</td>
                             <td>{{$item->hire_date}}</td>
                             <td>{{$item->department_name->name}}</td>
-                            <td>
-                                <a class="btn btn-primary" href="{{Route('employee.edit',$item->id)}}">Edit</a>
-                                <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</a>
-
+                            <td style="display: flex;">
+                                
+                                    <a class="btn btn-primary" href="{{Route('employee.edit',$item->id)}}"><i class="fa-solid fa-pen-to-square">edit</i></a>
+                                    <a class="btn btn-success" href="{{Route('employee.show',$item->id)}}"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-secondary" href="{{Route('employee.email.from',$item->id)}}"><i class="fa-solid fa-envelope">Email</i></a>
+                                
                                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
