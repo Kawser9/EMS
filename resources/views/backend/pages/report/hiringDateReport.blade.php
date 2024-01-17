@@ -36,18 +36,6 @@
                         </select>
                     </div>
                 </div>
-  
-            {{-- <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label for="start_time">Start Time:</label>
-                    <input type="time" class="form-control" id="start_time" name="start_time" required>
-                </div>
-            <div class="col-md-6 mb-3">
-                <label for="end_time">End Time:</label>
-                <input type="time" class="form-control" id="end_time" name="end_time" required>
-            </div>
-            </div> --}}
-  
         <button type="submit" class="btn btn-primary">Generate Report</button>
         </form>
 
@@ -57,7 +45,6 @@
                     <h1>Employee Manahement System</h1>
                     <p>{{auth()->user()->name}}</p>
                     <p>Report of {{request()->start_date}} to {{request()->end_date}}</p>
-                    <h1>{{request()->department_id}}</h1>
                 </div>
                 
                 <br>
@@ -78,7 +65,6 @@
                             </thead>
                             <tbody>
                                 @if(isset($employees))
-                                {{-- <span>Total product : {{$department_name->count()}}</span>  --}}
                                 @foreach($employees as $key=>$employee)
                                 <tr>
                                     <td>{{$key+1}}</td>

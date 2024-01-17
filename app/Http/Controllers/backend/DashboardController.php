@@ -11,9 +11,10 @@ class DashboardController extends Controller
 {
     public function dashboard()
     {
-        $employee=Employee::where('status' , 'active')->get();
+        $employee=Employee::all();
         $ecount = Employee::where('status' , 'active')->count();
-        return view('backend.pages.dashboard',compact(['employee','ecount']));
+        $count_all_employee = $employee->count();
+        return view('backend.pages.dashboard',compact(['employee','ecount','count_all_employee']));
     }
 
     public function getTotalSalary()

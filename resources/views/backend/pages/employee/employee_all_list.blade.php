@@ -2,10 +2,7 @@
 @section('content')
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between">
-        <h6 class="m-0 font-weight-bold text-primary">On service employee list</h6>
-        <div class="right">
-            <a class="btn btn-primary" href="{{Route('employee.create')}}">Create</a>
-        </div>
+        <h6 class="m-0 font-weight-bold text-primary">All employee list</h6>
     </div>
     <div class="card-body">
         <div class="table-responsive">
@@ -17,7 +14,7 @@
                         <th>Employee ID</th>
                         <th>Position</th>
                         <th>Age</th>
-                        <th>Salary</th>
+                        <th>Status</th>
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Start date</th>
@@ -43,12 +40,13 @@
                                 ?>
                                 {{$age}}
                             </td>
-                            <td>{{$item->salary }} BTD</td>
+                            <td>{{$item->status }}</td>
                             <td>{{$item->phone_number}}</td>
                             <td>{{$item->email}}</td>
                             <td>{{$item->hire_date}}</td>
                             <td>{{$item->department_name->name}}</td>
                             <td style="display: flex;">
+                                
                                     <a class="btn btn-primary" href="{{Route('employee.edit',$item->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
                                     <a class="btn btn-success" href="{{Route('employee.show',$item->id)}}"><i class="fa fa-eye"></i></a>
                                     <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a>

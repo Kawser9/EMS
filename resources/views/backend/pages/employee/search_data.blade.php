@@ -43,7 +43,8 @@
                 <td>{{date('d-m-Y', strtotime($item->hire_date))}}</td>
                 <td>{{$item->department_name->name}}</td>
                 <td>
-                    <a href="{{Route('employee.email.from',$item->id)}}" class="btn btn-dark">Send Email</a>
+                    <a href="{{Route('employee.email.from',$item->id)}}" class="btn btn-dark"><i class="fa-solid fa-envelope"></i></a>
+                    <a class="btn btn-primary" href="{{Route('employee.edit',$item->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
                 
             </tr>

@@ -27,7 +27,8 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'], function(){
     Route::get('/',[DashboardController::class,'dashboard'])->name('dashboard');
 
 
-
+    
+    Route::get('/employee-all-list',[EmployeeController::class,'employee_all_list'])->name('employee.all.list');
     Route::get('/employee-list',[EmployeeController::class,'index'])->name('employee.list');
     Route::get('/employee-create',[EmployeeController::class,'create'])->name('employee.create');
     Route::post('/employee-store',[EmployeeController::class, 'store'])->name('employee.store');

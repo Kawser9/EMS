@@ -109,6 +109,15 @@
                 <label for="inputZip" class="form-label">Zip</label>
                 <input type="text" name="zip_code" class="form-control" id="inputZip" value="{{$employee->zip_code}}">
             </div>
+
+
+            <div class="col-md-2">
+                <label for="status" class="form-label">Status</label>
+                <select id="status" name="status" class="form-control">
+                    <option @if ($employee->status == 'active') selected @endif>active</option>
+                    <option @if ($employee->status == 'deactive') selected @endif>deactive</option>
+                </select>
+            </div>
             <div class="col-12">
                 <label for="address" class="form-label">Address</label>
                 <input type="text" name="address" class="form-control" id="address" placeholder="1234 Main St" value="{{$employee->address}}">

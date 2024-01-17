@@ -25,8 +25,8 @@
                             <td>{{$item->departmentId}}</td>
                             <td>{{$item->name}}</td>
                             <td>
-                                <a class="btn btn-primary" href="{{Route('department.edit',$item->id)}}">Edit</a>
-                                <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</a>
+                                <a class="btn btn-primary" href="{{Route('department.edit',$item->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a>
 
                                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
                                 <div class="modal-dialog" role="document">

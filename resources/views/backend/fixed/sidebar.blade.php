@@ -1,12 +1,13 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{Route('dashboard')}}">
         <div class="sidebar-brand-icon rotate-n-15">
             <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="sidebar-brand-text mx-3">EMS </div>
+        <div class="sidebar-brand-text mx-1">Employee Management System </div>
     </a>
+
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
@@ -36,7 +37,8 @@
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Employee</h6>
-                <a class="collapse-item" href="{{Route('employee.list')}}">List</a>
+                <a class="collapse-item" href="{{Route('employee.list')}}">In servise employee list</a>
+                <a class="collapse-item" href="{{Route('employee.all.list')}}">All employee list</a>
                 <a class="collapse-item" href="{{Route('employee.create')}}">Create</a>
             </div>
         </div>
@@ -71,7 +73,7 @@
     <li class="nav-item">
         <a class="nav-link " href="{{Route('general.report')}}" data-toggle="" data-target=""
              aria-controls="collapseThree">
-            <span>General Report</span>
+            <span>Dep.& Date wise Report</span>
         </a>
     </li>
     <li class="nav-item">
@@ -80,12 +82,12 @@
             <span>Salary Distribution Report</span>
         </a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link " href="{{Route('report.list')}}" data-toggle="" data-target="#collapseThree"
              aria-controls="collapseThree">
             <span>Report</span>
         </a>
-    </li>
+    </li> --}}
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

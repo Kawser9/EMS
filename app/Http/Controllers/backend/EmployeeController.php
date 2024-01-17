@@ -10,8 +10,14 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::with('department_name')->where('status' , 'active')->latest()->get();
+        $employees = Employee::with('department_name')->where('status' , 'active')->latest()->paginate(5);
         return view('backend.pages.employee.index',compact('employees'));
+    }
+
+    public function employee_all_list()
+    {
+        $employees = Employee::with('department_name')->latest()->paginate(5);
+        return view('backend.pages.employee.employee_all_list',compact('employees'));
     }
     public function create()
     {
@@ -109,7 +115,8 @@ class EmployeeController extends Controller
             'position' => $request->position,
             'salary' => $request->salary,
             'hire_date' => $request->hire_date,
-            'notes' => $request->notes
+            'notes' => $request->notes,
+            'status' => $request->status
         ]);
         notify()->success('Employee information updated succesfully.', 'Employee');
         return redirect()->back();
