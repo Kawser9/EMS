@@ -31,7 +31,7 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#collapseOne"
             aria-expanded="true" aria-controls="collapseTwo">
-            {{-- <i class="fas fa-fw fa-cog"></i> --}}
+            {{-- <i class="fas fa-fw fa-cog"></i>  --}}
             <span>Employee</span>
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -58,6 +58,29 @@
             </div>
         </div>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#heading4"
+            aria-expanded="true" aria-controls="heading4">
+            {{-- <i class="fas fa-fw fa-cog"></i> --}}
+            <span>Product</span>
+        </a>
+        <div id="heading4" class="collapse" aria-labelledby="heading4" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Product</h6>
+                <a class="collapse-item" href="{{Route('product.list')}}">Product List</a>
+                <a class="collapse-item" href="{{Route('product.create')}}">Product Create</a>
+            </div>
+        </div>
+    </li>
+    <div>
+        <li class="nav-item">
+            <a class="nav-link " href="{{Route('ajax.index')}}" data-toggle="" data-target=""
+                aria-controls="collapseThree">
+                <span>Ajax List</span>
+            </a>
+        </li>
+    </div>
     <li class="nav-item">
         <a class="nav-link " href="{{Route('employee.search')}}" data-toggle="" data-target=""
              aria-controls="collapseThree">

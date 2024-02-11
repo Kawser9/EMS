@@ -15,7 +15,7 @@
             <p class="alert alert-danger"> {{$error}}</p>
             </div>
         @endforeach
-        @endif 
+        @endif
 
         <form class="row g-3" action="" method="post" enctype="">
            @csrf
@@ -113,7 +113,7 @@
 <div class="card shadow mb-4">
     <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Employee information </h4>
-        <form class="needs-validation" method="post" action="{{Route('employee.email.data')}}" novalidate>
+        <form class="needs-validation" method="post" action="{{Route('employee.email.data')}}" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="row g-3">
                 <div class="col-md-12">
@@ -140,8 +140,12 @@
                     <label for="message" class="form-label">Message:</label>
                     <textarea class="form-control" name="message" id="message" placeholder="Write your Message here.." required></textarea>
                 </div>
+                <div class="col-sm-4">
+                    <label for="image" class="form-label">Image:</label>
+                    <input type="file" class="form-control" name="image[]" id="image" multiple required>
+                </div><br><br><br>
                 <div class="col-md-12">
-                    <button class="btn btn-primary" type="submit">Send Email</button>
+                    <button class="btn btn-primary" style="margin-top: 10px" type="submit">Send Email</button>
                 </div>
             </div>
         </form>

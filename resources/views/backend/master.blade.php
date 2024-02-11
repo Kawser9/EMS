@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>EMS </title>
-    
+
     @notifyCss
     <!-- Custom fonts for this template-->
     <link href="{{ URL('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -22,8 +22,8 @@
     <!-- Custom styles for this template-->
     <link href="{{ URL('backend/css/sb-admin-2.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    
+
+
 </head>
 
 <body id="page-top">
@@ -67,7 +67,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-   
+    @yield('script')
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ URL('backend/vendor/jquery/jquery.min.js')}}"></script>
@@ -85,8 +85,11 @@
     <!-- Page level custom scripts -->
     <script src="{{ URL('backend/js/demo/chart-area-demo.js')}}"></script>
     <script src="{{ URL('backend/js/demo/chart-pie-demo.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"></script>
-        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $.ajaxSetup({
                         headers: {

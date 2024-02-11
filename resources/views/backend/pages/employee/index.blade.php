@@ -4,7 +4,7 @@
     <div class="card-header py-3 d-flex justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">On service employee list</h6>
         <div class="right">
-            <a class="btn btn-primary" href="{{Route('employee.create')}}">Create</a>
+            <a class="btn btn-primary" target="_blank" href="{{Route('employee.create')}}">Create</a>
         </div>
     </div>
     <div class="card-body">
@@ -38,7 +38,7 @@
                                     $birthdayDate = \Carbon\Carbon::createFromFormat('Y-m-d', $birthday);
                                     $age = $birthdayDate->age;
                                 } else {
-                                    $age = ''; 
+                                    $age = '';
                                 }
                                 ?>
                                 {{$age}}
@@ -53,7 +53,7 @@
                                     <a class="btn btn-success" href="{{Route('employee.show',$item->id)}}"><i class="fa fa-eye"></i></a>
                                     <a class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"><i class="fa fa-trash"></i></a>
                                     <a class="btn btn-secondary" href="{{Route('employee.email.from',$item->id)}}"><i class="fa-solid fa-envelope"></i></a>
-                                
+
                                 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">

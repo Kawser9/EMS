@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function dashboard()
     {
         $employee=Employee::all();
-        $ecount = Employee::where('status' , 'active')->count();
+        $ecount = Employee::where('status' , 'active')->get();
         $count_all_employee = $employee->count();
         return view('backend.pages.dashboard',compact(['employee','ecount','count_all_employee']));
     }
@@ -22,7 +22,7 @@ class DashboardController extends Controller
         $totalSalary = Employee::sum('salary');
         return response()->json(['totalSalary' => $totalSalary]);
     }
-    
+
     public function adminLogin()
     {
         return view('backend.pages.login');

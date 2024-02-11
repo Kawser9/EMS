@@ -24,10 +24,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-        $department=Department::all();
-            view()->share('department', $department);
+        // $department=Department::all();
+        //     view()->share('department', $department);
 
-    
+
         Paginator::useBootstrap();
     }
 }

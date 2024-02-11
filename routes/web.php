@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\backend\AjaxController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\DepartmentController;
 use App\Http\Controllers\backend\EmployeeController;
 use App\Http\Controllers\backend\PHPMailerController;
+use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\ReportController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +29,7 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'], function(){
     Route::get('/',[DashboardController::class,'dashboard'])->name('dashboard');
 
 
-    
+
     Route::get('/employee-all-list',[EmployeeController::class,'employee_all_list'])->name('employee.all.list');
     Route::get('/employee-list',[EmployeeController::class,'index'])->name('employee.list');
     Route::get('/employee-create',[EmployeeController::class,'create'])->name('employee.create');
@@ -36,7 +38,7 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'], function(){
     Route::get('/employee-show/{id}',[EmployeeController::class, 'show'])->name('employee.show');
     Route::put('/employee-update/{id}',[EmployeeController::class, 'update'])->name('employee.update');
     Route::get('/employee-delete/{id}',[EmployeeController::class, 'delete'])->name('employee.delete');
-    
+
     Route::get('/employee-search',[EmployeeController::class, 'employee_search'])->name('employee.search');
     Route::get('/ajax/employee-details/search/{search_query}',[EmployeeController::class, 'ajax_employee_details'])->name('employee.ajax_employee_details');
 
@@ -58,4 +60,29 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'], function(){
     Route::get('/general/report/dataa',[ReportController::class, 'general_report_data'])->name('general.report.data');
     // Route::get('/report/depWiseReport/{departmentId}',[ReportController::class, 'depWiseReport'])->name('get.departmentData');
     // Route::get('/get-department-data/{departmentId}',[ReportController::class ,'getDepartmentData'])->name('get.departmentData');
+
+    Route::get('/product-list',[ProductController::class, 'list'])->name('product.list');
+    Route::get('/product-create',[ProductController::class, 'create'])->name('product.create');
+    Route::post('/product-store',[ProductController::class, 'store'])->name('product.store');
+    Route::get('/product-show/{id}',[ProductController::class, 'show'])->name('product.show');
+    Route::get('/product/delete/{id}',[ProductController::class, 'delete'])->name('product.delete');
+
+
+
+    // Route::get('/ajax/data_list', [AjaxController::class, 'list'])->name('ajax.list');
+    // Route::post('/ajax/store', [AjaxController::class, 'store'])->name('ajax.store');
+    // Route::get('/ajax/edit/{id}', [AjaxController::class, 'edit'])->name('ajax.edit');
+
+
+    // Route::get('/list', [AjaxController::class, 'list'])->name('ajax.list');
+    // Route::get('/show', [AjaxController::class, 'getMembers']);
+    // Route::post('/save', [AjaxController::class, 'save']);
+    // Route::post('/delete', [AjaxController::class, 'delete']);
+    // Route::post('/update', [AjaxController::class, 'update']);
+
+    Route::get('products', [AjaxController::class, 'index'])->name('ajax.index');
+    Route::post('store-product', [AjaxController::class, 'store']);
+    Route::post('edit-product', [AjaxController::class, 'edit']);
+    Route::post('delete-product', [AjaxController::class, 'destroy']);
+
 });

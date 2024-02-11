@@ -20,7 +20,7 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>
-                    <a href="{{Route('employee.show',$item->id)}}"> 
+                    <a href="{{Route('employee.show',$item->id)}}">
                         {{$item->first_name .' '.$item->last_name }}
                     </a>
                 </td>
@@ -32,7 +32,7 @@
                         $birthdayDate = \Carbon\Carbon::createFromFormat('Y-m-d', $birthday);
                         $age = $birthdayDate->age;
                     } else {
-                        $age = ''; 
+                        $age = '';
                     }
                     ?>
                     {{$age}}
@@ -46,7 +46,7 @@
                     <a href="{{Route('employee.email.from',$item->id)}}" class="btn btn-dark"><i class="fa-solid fa-envelope"></i></a>
                     <a class="btn btn-primary" href="{{Route('employee.edit',$item->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
                 </td>
-                
+
             </tr>
         @endforeach
     </tbody>
