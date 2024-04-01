@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiProductController;
 use App\Http\Controllers\backend\AjaxController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\backend\DepartmentController;
@@ -84,5 +85,8 @@ Route::group(['prefix'=>'admin','middleware'=>'admin'], function(){
     Route::post('store-product', [AjaxController::class, 'store']);
     Route::post('edit-product', [AjaxController::class, 'edit']);
     Route::post('delete-product', [AjaxController::class, 'destroy']);
+
+
+    Route::get('/api/product',[ApiProductController::class, 'index'])->name('api.product.list');
 
 });

@@ -58,11 +58,22 @@
             </div>
         </div>
     </li>
-
     <li class="nav-item">
         <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#heading4"
             aria-expanded="true" aria-controls="heading4">
-            {{-- <i class="fas fa-fw fa-cog"></i> --}}
+            <span>API Product</span>
+        </a>
+        <div id="heading4" class="collapse" aria-labelledby="heading4" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Product</h6>
+                <a class="collapse-item" href="{{Route('api.product.list')}}">API Product List</a>
+                {{-- <a class="collapse-item" href="{{Route('api.product.create')}}">API Product Create</a> --}}
+            </div>
+        </div>
+    </li>
+    {{-- <li class="nav-item">
+        <a class="nav-link collapsed" href="" data-toggle="collapse" data-target="#heading4"
+            aria-expanded="true" aria-controls="heading4">
             <span>Product</span>
         </a>
         <div id="heading4" class="collapse" aria-labelledby="heading4" data-parent="#accordionSidebar">
@@ -72,7 +83,7 @@
                 <a class="collapse-item" href="{{Route('product.create')}}">Product Create</a>
             </div>
         </div>
-    </li>
+    </li> --}}
     <div>
         <li class="nav-item">
             <a class="nav-link " href="{{Route('ajax.index')}}" data-toggle="" data-target=""
