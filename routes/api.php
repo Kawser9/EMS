@@ -21,6 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/products', [ProductController::class, 'allProduct']);
+Route::get('/allImage', [ProductController::class, 'allImage']);
 Route::get('/products/{id}', [ProductController::class, 'singleProduct']);
 Route::post('/products/store', [ProductController::class, 'storeProduct']);
 Route::put('/products/update/{id}', [ProductController::class, 'updateProduct']);
@@ -33,3 +34,4 @@ Route::post('/categories/store', [CategoryController::class, 'store']);
 Route::put('/categories/update/{id}', [CategoryController::class, 'update']);
 Route::delete('/categories/delete/{id}', [CategoryController::class, 'delete']);
 
+Route::get('/categories/order/data', [CategoryController::class, 'orderDetails']);

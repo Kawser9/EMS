@@ -26,13 +26,13 @@
                             <td>{{$item->productName}}</td>
                             <td>{{$item->productPrice}}</td>
                             <td style="display: flex;">
-                                @foreach (explode('|', $item->productImage) as $image)
+                                {{-- @foreach (explode('|', $item->productImage) as $image)
                                     <br>
                                     <a class="image-popup-vertical-fit" href="{{url('/productImage/' .$image)}}">
                                         <img src="{{url('/productImage/' .$image)}}" style="width: 20px; height:40px">
                                     </a>
-                                @endforeach
-                                {{-- <img src="{{url('/uploads/products/'.$item->productImage)}}"style="width: 50px;" alt=""> --}}
+                                @endforeach --}}
+                                <img src="{{url('/uploads/products/'.$item->frontImage)}}"style="width: 50px;" alt="">
                             </td>
                             <td >
                                     {{-- <a class="btn btn-primary" href="{{Route('employee.edit',$item->id)}}"><i class="fa-solid fa-pen-to-square"></i></a> --}}

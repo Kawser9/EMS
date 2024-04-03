@@ -6,30 +6,129 @@ use App\Http\Controllers\Controller;
 use App\Models\backend\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    // public function allProduct()
+    // {
+
+    //     $products = DB::table('products')
+    //         ->join('categories', 'products.category_id', '=', 'categories.id')
+    //         ->select('products.*', 'categories.name as category_name')
+    //         ->get();
+    //     return response()->json(['products' => $products],200);
+    // }
+
     public function allProduct()
     {
-
         $products = DB::table('products')
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->select('products.*', 'categories.name as category_name')
             ->get();
-        // $products = Product::get();
-        return response()->json(['products' => $products],200);
+
+        $productsWithImages = [];
+
+        foreach ($products as $product) {
+            $frontImageUrl = $product->frontImage ? asset('uploads/products/' . $product->frontImage) : null;
+            $sideImageUrl = $product->sideImage ? asset('uploads/products/' . $product->sideImage) : null;
+
+            $product->frontImage = $frontImageUrl;
+            $product->sideImage = $sideImageUrl;
+
+            $productsWithImages[] = $product;
+        }
+
+        if (!empty($productsWithImages)) {
+            return response()->json(['products' => $productsWithImages], 200);
+        } else {
+            return response()->json(['error' => 'No Product found'], 404);
+        }
     }
+
+    // public function allImage()
+    // {
+    //     $products = Product::all();
+    //     $imagePaths = [];
+
+    //     foreach ($products as $product) {
+    //         $frontImagePath = $product->frontImage;
+    //         $sideImagePath = $product->sideImage;
+
+    //         if ($frontImagePath) {
+    //             $frontImageUrl = Storage::path('products/' . $frontImagePath);
+    //             $imagePaths[] = $frontImageUrl;
+    //         }
+
+    //         if ($sideImagePath) {
+    //             $sideImageUrl = Storage::path('products/' . $sideImagePath);
+    //             $imagePaths[] = $sideImageUrl;
+    //         }
+    //     }
+
+    //     if (!empty($imagePaths)) {
+    //         return response()->json(['image_paths' => $imagePaths], 200);
+    //     } else {
+    //         return response()->json(['error' => 'No images found'], 404);
+    //     }
+    // }
+    // public function allImage()
+    // {
+    //     $products = Product::all();
+    //     $imagePaths = [];
+
+    //     foreach ($products as $product) {
+    //         $frontImagePath = $product->frontImage;
+    //         if ($frontImagePath) {
+    //             $fullPath = Storage::path('products/' . $frontImagePath);
+
+    //             if (file($fullPath))
+    //             {
+    //                 $imagePaths[] = $fullPath;
+    //             }
+    //         }
+    //     }
+
+    //     if (!empty($imagePaths)) {
+
+    //         return response()->json(['image_paths' => $imagePaths], 200);
+    //     } else {
+    //         return response()->json(['error' => 'No images found'], 404);
+    //     }
+    // }
+
+    // public function singleProduct($id)
+    // {
+    //     // $product = Product::find($id);
+    //     $product = DB::table('products')
+    //         ->join('categories', 'products.category_id', '=', 'categories.id')
+    //         ->select('products.*', 'categories.name as category_name')
+    //         ->where('products.id', $id)
+    //         ->first();
+    //     return response()->json(['product' => $product],200);
+    // }
     public function singleProduct($id)
     {
-        // $product = Product::find($id);
         $product = DB::table('products')
             ->join('categories', 'products.category_id', '=', 'categories.id')
             ->select('products.*', 'categories.name as category_name')
             ->where('products.id', $id)
             ->first();
-        return response()->json(['product' => $product],200);
+
+        if ($product) {
+            $frontImageUrl = $product->frontImage ? asset('uploads/products/' . $product->frontImage) : null;
+            $sideImageUrl = $product->sideImage ? asset('uploads/products/' . $product->sideImage) : null;
+
+            $product->frontImage = $frontImageUrl;
+            $product->sideImage = $sideImageUrl;
+
+            return response()->json(['product' => $product], 200);
+        } else {
+            return response()->json(['error' => 'Product not found'], 404);
+        }
     }
+
     public function deleteProduct($id)
     {
         $product = Product::find($id);

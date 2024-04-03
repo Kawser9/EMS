@@ -47,4 +47,35 @@ class CategoryController extends Controller
             }
         }
     }
+
+
+    public function orderDetails()
+    {
+        $orderData = [
+            "mk_activity_key" => "4ER77U",
+            "order_details" => [
+                "order_id" => "SO1234567",
+                "products" => [
+                    [
+                        "product_id" => "PID_00404",
+                        "product_name" => "Bag",
+                        "quantity" => 3,
+                        "category" => "flat",
+                        "regular_price" => 1000,
+                        "offer_price" => 800,
+                        "offer_status" => true,
+                        "product_commission" => 40
+                    ]
+                ],
+                "total_amount" => 6900,
+                "coupon_code" => "BLACKFRIDAY",
+                "discount_amount" => 900,
+                "subtotal_amount" => 6000,
+                "delivery_status" => "pending"
+            ]
+        ];
+
+        // return response()->json(['orderRequest' => $orderData],200);
+        return response()->json($orderData, 200);
+    }
 }
