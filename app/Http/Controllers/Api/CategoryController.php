@@ -66,7 +66,7 @@ class CategoryController extends Controller
                         "offer_status" => true,
                         "product_commission" => 40
                     ]
-                ],
+                ], 
                 "total_amount" => 6900,
                 "coupon_code" => "BLACKFRIDAY",
                 "discount_amount" => 900,

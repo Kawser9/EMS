@@ -166,6 +166,44 @@ class ProductController extends Controller
                     $image->storeAs('/products', $sideImage);
                 }
 
+                // try {
+                //     $data = $request->all();
+                //     $products = [];
+
+                //     foreach ($data as $item) {
+                //         $product = [
+                //             'productCode'       => $item['productCode'],
+                //             'productName'       => $item['productName'],
+                //             'category_id'       => $item['category_id'],
+                //             'productPrice'      => $item['productPrice'],
+                //             'quantity'          => $item['quantity'],
+                //             'total'             => $item['productPrice'] * $item['quantity'],
+                //             'opening_value'     => $item['opening_value'] ?? null,
+                //             'reOrder_quantity'  => $item['reOrder_quantity'] ?? null,
+                //             'description'       => 'abc',
+                //             'status'            => 'active',
+                //             'productImage'      => 'no',
+                //             'frontImage'        => $item['frontImage'] ?? null,
+                //             'sideImage'         => $item['sideImage'] ?? null,
+                //         ];
+
+                //         // Add each product to the $products array
+                //         $products[] = $product;
+                //     }
+
+                //     // Create multiple products
+                //     Product::insert($products);
+
+                //     $message = 'Successfully created';
+                //     return response()->json(['message' => $message], 201);
+                // } catch (\Exception $e) {
+                //     // If an exception occurs, handle it here
+                //     $message = 'Error creating products: ' . $e->getMessage();
+                //     return response()->json(['message' => $message], 500);
+                // }
+
+
+
                 $data = $request->all();
 
                 Product::create([
