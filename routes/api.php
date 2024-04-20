@@ -24,6 +24,7 @@ Route::get('/products', [ProductController::class, 'allProduct']);
 Route::get('/allImage', [ProductController::class, 'allImage']);
 Route::get('/products/{id}', [ProductController::class, 'singleProduct']);
 Route::post('/products/store', [ProductController::class, 'storeProduct']);
+Route::post('/products/excel', [ProductController::class, 'storeExcel']);
 Route::put('/products/update/{id}', [ProductController::class, 'updateProduct']);
 Route::delete('/products/delete/{id}', [ProductController::class, 'deleteProduct']);
 

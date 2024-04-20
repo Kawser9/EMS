@@ -137,6 +137,182 @@ class ProductController extends Controller
         return response()->json(['message' =>$message],201);
     }
 
+    public function excelupload(Request $request)
+    {
+        DB::beginTransaction();
+        $datas = $request->all();
+            foreach ($datas as $key => $data) {
+                Product::create([
+                    'productCode'       => $data['productCode'],
+                    'productName'       => $data['productName'],
+                    'category_id'       => $data['category_id'],
+                    'productPrice'      => $data['productPrice'],
+                    'quantity'          => $data['quantity'],
+                    'total'             => $data['total'],
+                    'opening_value'     => $data['opening_value'] ,
+                    'reOrder_quantity'  => $data['reOrder_quantity'] ,
+                    'description'       => $data['description'],
+                    'status'            => $data['status'],
+                    'productImage'      => $data['productImage'],
+                    'frontImage'        => $data['frontImage'] ,
+                    'sideImage'         => $data['sideImage'] ,
+                    'discount'         => $data['discount'] ,
+                    ]);
+            }
+
+            DB::commit();
+                $message = 'Successfully created';
+                return response()->json(['message' => $message],status: 201);
+        // .................................................................
+                // $datas = $request->all();
+                // foreach ($datas as $key => $data ) {
+                //     Product::create([
+                //     'productCode'       => $data['productCode'],
+                //     'productName'       => $data['productName'],
+                //     'category_id'       => $data['category_id'],
+                //     'productPrice'      => $data['productPrice'],
+                //     'quantity'          => $data['quantity'],
+                //     'total'             => $data['total'],
+                //     'opening_value'     => $data['opening_value'] ,
+                //     'reOrder_quantity'  => $data['reOrder_quantity'] ,
+                //     'description'       => 'abc',
+                //     'status'            => 'active',
+                //     'productImage'      => 'no',
+                //     'frontImage'        => $data['frontImage'] ,
+                //     'sideImage'         => $data['sideImage'] ,
+                //     ]);
+
+                // }
+                // $message = 'Successfully created';
+                // return response()->json(['message' => $message],status: 201);
+
+    }
+
+
+    public function storeExcel(Request $request)
+    {
+        try {
+            // $validate = Validator::make($request->all(), [
+            // ]);
+
+            // if ($validate->fails()) {
+            //     return response()->json(['error' => 'Validation failed'], 422);
+            // }
+
+            if ($request->hasFile('frontImage')) {
+                $frontImage = $request->file('frontImage')->store('products');
+            }
+
+            if ($request->hasFile('sideImage')) {
+                $sideImage = $request->file('sideImage')->store('products');
+            }
+
+            DB::beginTransaction();
+
+            foreach ($request->all() as $data) {
+
+                $validator = Validator::make($data, [
+                    'productCode'       => 'required',
+                    'productName'      => 'required',
+                    'category_id'      => 'required',
+                    'productPrice'     => 'required',
+                ]);
+                if ($validator->fails()) {
+                    $message = $validator->getMessageBag();
+                    return response()->json(['error' => $message], 201);
+                }
+
+                Product::create([
+                    'productCode'       => $data['productCode'],
+                    'productName'      => $data['productName'],
+                    'category_id'      => $data['category_id'],
+                    'productPrice'     => $data['productPrice'],
+                    'quantity'         => $data['quantity'] ?? null,
+                    'total'            => $data['total'] ?? null,
+                    'opening_value'    => $data['opening_value'] ?? null,
+                    'reOrder_quantity' => $data['reOrder_quantity'] ?? null,
+                    'description'      => $data['description'] ?? null,
+                    'status'           => $data['status'] ?? null,
+                    'productImage'     => $data['productImage'] ?? null,
+                    'frontImage'       => $frontImage ?? null,
+                    'sideImage'        => $sideImage ?? null,
+                    'discount'         => $data['discount'] ?? null,
+                ]);
+            }
+
+            DB::commit();
+
+            return response()->json(['message' => 'Products created successfully'], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
+
+    // public function storeExcel(Request $request)
+    // {
+    //     try {
+
+    //         $validate = Validator::make($request->all(), [
+    //             'category_id'   => 'required',
+    //             'productCode'   => 'required',
+    //             'productName'   => 'required',
+    //             'productPrice'  => 'required',
+    //         ]);
+
+    //         if ($validate->fails()) {
+    //             $message = $validate->getMessageBag();
+    //             return response()->json(['message' => $message], 201);
+    //         }
+
+    //         if ($request->isMethod('post')) {
+    //             if ($request->hasFile('frontImage')) {
+    //                 $image = $request->file('frontImage');
+    //                 $frontImage = date('Ymdhsi') . '_front.' . $image->getClientOriginalExtension();
+    //                 $image->storeAs('/products', $frontImage);
+    //             }
+
+    //             if ($request->hasFile('sideImage')) {
+    //                 $image = $request->file('sideImage');
+    //                 $sideImage = date('Ymdhsi') . '_side.' . $image->getClientOriginalExtension();
+    //                 $image->storeAs('/products', $sideImage);
+    //             }
+    //             DB::beginTransaction();
+
+    //             $datas = $request->all();
+    //             // if (!$datas) return response()->json(['message' => 'Thread not found'], 422);
+
+    //             foreach ($datas as $key => $data) {
+    //                     Product::create([
+    //                         'productCode'       => $data['productCode'],
+    //                         'productName'       => $data['productName'],
+    //                         'category_id'       => $data['category_id'],
+    //                         'productPrice'      => $data['productPrice'],
+    //                         'quantity'          => $data['quantity'],
+    //                         'total'             => $data['total'],
+    //                         'opening_value'     => $data['opening_value'] ,
+    //                         'reOrder_quantity'  => $data['reOrder_quantity'] ,
+    //                         'description'       => $data['description'],
+    //                         'status'            => $data['status'],
+    //                         'productImage'      => $data['productImage'],
+    //                         'frontImage'        => $data['frontImage'] ,
+    //                         'sideImage'         => $data['sideImage'] ,
+    //                         'discount'         => $data['discount'] ,
+    //                         ]);
+    //                 }
+
+    //                 DB::commit();
+
+    //             $message = 'Successfully created';
+    //             return response()->json(['message' => $message],status: 201);
+    //         }
+    //     } catch (\Exception $e) {
+    //         // Handle any exceptions here
+    //         return response()->json(['message' => $e->getMessage()], 500);
+    //     }
+    // }
+
 
     public function storeProduct(Request $request)
     {
@@ -165,59 +341,20 @@ class ProductController extends Controller
                     $sideImage = date('Ymdhsi') . '_side.' . $image->getClientOriginalExtension();
                     $image->storeAs('/products', $sideImage);
                 }
-
-                // try {
-                //     $data = $request->all();
-                //     $products = [];
-
-                //     foreach ($data as $item) {
-                //         $product = [
-                //             'productCode'       => $item['productCode'],
-                //             'productName'       => $item['productName'],
-                //             'category_id'       => $item['category_id'],
-                //             'productPrice'      => $item['productPrice'],
-                //             'quantity'          => $item['quantity'],
-                //             'total'             => $item['productPrice'] * $item['quantity'],
-                //             'opening_value'     => $item['opening_value'] ?? null,
-                //             'reOrder_quantity'  => $item['reOrder_quantity'] ?? null,
-                //             'description'       => 'abc',
-                //             'status'            => 'active',
-                //             'productImage'      => 'no',
-                //             'frontImage'        => $item['frontImage'] ?? null,
-                //             'sideImage'         => $item['sideImage'] ?? null,
-                //         ];
-
-                //         // Add each product to the $products array
-                //         $products[] = $product;
-                //     }
-
-                //     // Create multiple products
-                //     Product::insert($products);
-
-                //     $message = 'Successfully created';
-                //     return response()->json(['message' => $message], 201);
-                // } catch (\Exception $e) {
-                //     // If an exception occurs, handle it here
-                //     $message = 'Error creating products: ' . $e->getMessage();
-                //     return response()->json(['message' => $message], 500);
-                // }
-
-
-
                 $data = $request->all();
 
                 Product::create([
-                    'productCode'       => $data['productCode'],
-                    'productName'       => $data['productName'],
-                    'category_id'       => $data['category_id'],
-                    'productPrice'      => $data['productPrice'],
-                    'quantity'          => $data['quantity'],
-                    'total'             => $data['productPrice'] * $data['quantity'],
+                    'productCode'       => $data['productCode']?? null,
+                    'productName'       => $data['productName']?? null,
+                    'category_id'       => $data['category_id']?? null,
+                    'productPrice'      => $data['productPrice']?? null,
+                    'quantity'          => $data['quantity']?? null,
+                    'total'             => $data['productPrice'] * $data['quantity']?? null,
                     'opening_value'     => $data['opening_value'] ?? null,
                     'reOrder_quantity'  => $data['reOrder_quantity'] ?? null,
-                    'description'       => 'abc',
-                    'status'            => 'active',
-                    'productImage'      => 'no',
+                    'description'       => 'abc'?? null,
+                    'status'            => 'active'?? null,
+                    'productImage'      => 'no'?? null,
                     'frontImage'        => $frontImage ?? null,
                     'sideImage'         => $sideImage ?? null,
                 ]);
